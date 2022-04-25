@@ -1,0 +1,119 @@
+﻿<Window x:Class="Cursach3.Views.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cursach3.Views"
+        mc:Ignorable="d"
+        Title="AdminWindow" 
+        Height="750" 
+        Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition 
+                Height="0.15*"/>
+            <RowDefinition 
+                Height="0.9*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            Grid.Row="0"
+            Margin="8"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
+
+            <Button 
+                Width="100"
+                Margin="4"/>
+            <Button 
+                Width="100"
+                Margin="4"/>
+            <Button 
+                Width="100"
+                Margin="4"/>
+            <Button 
+                Width="100"
+                Margin="4"/>
+            <Button 
+                Width="100"
+                Margin="4"/>
+            <Button 
+                Width="100"
+                Margin="4"/>
+            <Button 
+                Width="100"
+                Margin="4"/>
+
+        </StackPanel>
+        
+        <StackPanel
+            Grid.Row="1">
+
+            <!--Materials-->
+            <DataGrid
+                Height="200">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        Header="Id"/>
+                    <DataGridTextColumn 
+                        Header="Number"/>
+                    <DataGridTextColumn 
+                        Header="Type"/>
+                    <DataGridTextColumn 
+                        Header="Amount"/>
+                    <DataGridTextColumn 
+                        Header="WherePlace"/>
+                    <DataGridTextColumn 
+                        Header="ArrivalTime"/>
+                </DataGrid.Columns>
+                
+            </DataGrid>
+
+            <!--Processes-->
+            <DataGrid
+                Height="200">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        Header="Id"/>
+                    <DataGridTextColumn 
+                        Header="Material"/>
+                    <DataGridTextColumn 
+                        Header="Product"/>
+                    <DataGridTextColumn 
+                        Header="Department"/>
+                    <DataGridTextColumn 
+                        Header="StartDate"/>
+                    <DataGridTextColumn 
+                        Header="EndDate"/>
+                    <DataGridTextColumn 
+                        Header="IsCompleted"/>
+                </DataGrid.Columns>
+                
+            </DataGrid>
+
+            <!--Products-->
+            <DataGrid
+                Height="200">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        Header="Id"/>
+                    <DataGridTextColumn 
+                        Header="Number"/>
+                    <DataGridTextColumn 
+                        Header="Product"/>
+                    <DataGridTextColumn 
+                        Header="Recipient"/>
+                    <DataGridTextColumn 
+                        Header="DeliveryDate"/>
+                    <DataGridTextColumn 
+                        Header="IsSent"/>
+                </DataGrid.Columns>
+                
+            </DataGrid>
+
+        </StackPanel>
+    </Grid>
+</Window>

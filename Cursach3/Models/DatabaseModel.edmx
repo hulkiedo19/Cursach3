@@ -1,0 +1,543 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище DatabaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="IdDepartment" />
+          </Key>
+          <Property Name="IdDepartment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmployeeNumber" Type="int" Nullable="false" />
+          <Property Name="WorkType" Type="int" Nullable="false" />
+          <Property Name="IsWork" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="IdMaterial" />
+          </Key>
+          <Property Name="IdMaterial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InventoryNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MaterialType" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="WherePlace" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ArrivalTime" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterialTypes">
+          <Key>
+            <PropertyRef Name="IdMaterialType" />
+          </Key>
+          <Property Name="IdMaterialType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="WorkType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Processes">
+          <Key>
+            <PropertyRef Name="IdProcess" />
+          </Key>
+          <Property Name="IdProcess" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaterialId" Type="int" Nullable="false" />
+          <Property Name="ProductType" Type="int" Nullable="false" />
+          <Property Name="DepartmentNumber" Type="int" Nullable="false" />
+          <Property Name="StartDateWork" Type="date" Nullable="false" />
+          <Property Name="EndDateWork" Type="date" Nullable="false" />
+          <Property Name="IsCompleted" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="IdProduct" />
+          </Key>
+          <Property Name="IdProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InventoryNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ProductType" Type="int" Nullable="false" />
+          <Property Name="Recipient" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DeliveryDate" Type="date" Nullable="false" />
+          <Property Name="IsSent" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductTypes">
+          <Key>
+            <PropertyRef Name="IdProductType" />
+          </Key>
+          <Property Name="IdProductType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UsedMaterialType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkTypes">
+          <Key>
+            <PropertyRef Name="IdWorkType" />
+          </Key>
+          <Property Name="IdWorkType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HowManyDaysInWork" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Departmen__WorkT__29572725">
+          <End Role="WorkTypes" Type="Self.WorkTypes" Multiplicity="1" />
+          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTypes">
+              <PropertyRef Name="IdWorkType" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="WorkType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Materials__Mater__2F10007B">
+          <End Role="MaterialTypes" Type="Self.MaterialTypes" Multiplicity="1" />
+          <End Role="Materials" Type="Self.Materials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialTypes">
+              <PropertyRef Name="IdMaterialType" />
+            </Principal>
+            <Dependent Role="Materials">
+              <PropertyRef Name="MaterialType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MaterialT__WorkT__267ABA7A">
+          <End Role="WorkTypes" Type="Self.WorkTypes" Multiplicity="1" />
+          <End Role="MaterialTypes" Type="Self.MaterialTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTypes">
+              <PropertyRef Name="IdWorkType" />
+            </Principal>
+            <Dependent Role="MaterialTypes">
+              <PropertyRef Name="WorkType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Processes__Depar__35BCFE0A">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Processes" Type="Self.Processes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="IdDepartment" />
+            </Principal>
+            <Dependent Role="Processes">
+              <PropertyRef Name="DepartmentNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Processes__Mater__33D4B598">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="1" />
+          <End Role="Processes" Type="Self.Processes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="IdMaterial" />
+            </Principal>
+            <Dependent Role="Processes">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Processes__Produ__34C8D9D1">
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="1" />
+          <End Role="Processes" Type="Self.Processes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTypes">
+              <PropertyRef Name="IdProductType" />
+            </Principal>
+            <Dependent Role="Processes">
+              <PropertyRef Name="ProductType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__Produc__38996AB5">
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTypes">
+              <PropertyRef Name="IdProductType" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ProductType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductTy__UsedM__2C3393D0">
+          <End Role="MaterialTypes" Type="Self.MaterialTypes" Multiplicity="1" />
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialTypes">
+              <PropertyRef Name="IdMaterialType" />
+            </Principal>
+            <Dependent Role="ProductTypes">
+              <PropertyRef Name="UsedMaterialType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DatabaseModelContainer">
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materials" EntityType="Self.Materials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialTypes" EntityType="Self.MaterialTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Processes" EntityType="Self.Processes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkTypes" EntityType="Self.WorkTypes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Departmen__WorkT__29572725" Association="Self.FK__Departmen__WorkT__29572725">
+            <End Role="WorkTypes" EntitySet="WorkTypes" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Materials__Mater__2F10007B" Association="Self.FK__Materials__Mater__2F10007B">
+            <End Role="MaterialTypes" EntitySet="MaterialTypes" />
+            <End Role="Materials" EntitySet="Materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MaterialT__WorkT__267ABA7A" Association="Self.FK__MaterialT__WorkT__267ABA7A">
+            <End Role="WorkTypes" EntitySet="WorkTypes" />
+            <End Role="MaterialTypes" EntitySet="MaterialTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Processes__Depar__35BCFE0A" Association="Self.FK__Processes__Depar__35BCFE0A">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Processes" EntitySet="Processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Processes__Mater__33D4B598" Association="Self.FK__Processes__Mater__33D4B598">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="Processes" EntitySet="Processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Processes__Produ__34C8D9D1" Association="Self.FK__Processes__Produ__34C8D9D1">
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+            <End Role="Processes" EntitySet="Processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Produc__38996AB5" Association="Self.FK__Products__Produc__38996AB5">
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductTy__UsedM__2C3393D0" Association="Self.FK__ProductTy__UsedM__2C3393D0">
+            <End Role="MaterialTypes" EntitySet="MaterialTypes" />
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="IdDepartment" />
+          </Key>
+          <Property Name="IdDepartment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployeeNumber" Type="Int32" Nullable="false" />
+          <Property Name="WorkType" Type="Int32" Nullable="false" />
+          <Property Name="IsWork" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="WorkType1" Relationship="Self.FK__Departmen__WorkT__29572725" FromRole="Departments" ToRole="WorkTypes" />
+          <NavigationProperty Name="Processes" Relationship="Self.FK__Processes__Depar__35BCFE0A" FromRole="Departments" ToRole="Processes" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="IdMaterial" />
+          </Key>
+          <Property Name="IdMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InventoryNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaterialType" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="WherePlace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ArrivalTime" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="MaterialType1" Relationship="Self.FK__Materials__Mater__2F10007B" FromRole="Materials" ToRole="MaterialTypes" />
+          <NavigationProperty Name="Processes" Relationship="Self.FK__Processes__Mater__33D4B598" FromRole="Materials" ToRole="Processes" />
+        </EntityType>
+        <EntityType Name="MaterialType">
+          <Key>
+            <PropertyRef Name="IdMaterialType" />
+          </Key>
+          <Property Name="IdMaterialType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WorkType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Materials" Relationship="Self.FK__Materials__Mater__2F10007B" FromRole="MaterialTypes" ToRole="Materials" />
+          <NavigationProperty Name="WorkType1" Relationship="Self.FK__MaterialT__WorkT__267ABA7A" FromRole="MaterialTypes" ToRole="WorkTypes" />
+          <NavigationProperty Name="ProductTypes" Relationship="Self.FK__ProductTy__UsedM__2C3393D0" FromRole="MaterialTypes" ToRole="ProductTypes" />
+        </EntityType>
+        <EntityType Name="Process">
+          <Key>
+            <PropertyRef Name="IdProcess" />
+          </Key>
+          <Property Name="IdProcess" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="ProductType" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentNumber" Type="Int32" Nullable="false" />
+          <Property Name="StartDateWork" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDateWork" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsCompleted" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Processes__Depar__35BCFE0A" FromRole="Processes" ToRole="Departments" />
+          <NavigationProperty Name="Material" Relationship="Self.FK__Processes__Mater__33D4B598" FromRole="Processes" ToRole="Materials" />
+          <NavigationProperty Name="ProductType1" Relationship="Self.FK__Processes__Produ__34C8D9D1" FromRole="Processes" ToRole="ProductTypes" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IdProduct" />
+          </Key>
+          <Property Name="IdProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InventoryNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductType" Type="Int32" Nullable="false" />
+          <Property Name="Recipient" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsSent" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ProductType1" Relationship="Self.FK__Products__Produc__38996AB5" FromRole="Products" ToRole="ProductTypes" />
+        </EntityType>
+        <EntityType Name="ProductType">
+          <Key>
+            <PropertyRef Name="IdProductType" />
+          </Key>
+          <Property Name="IdProductType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UsedMaterialType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MaterialType" Relationship="Self.FK__ProductTy__UsedM__2C3393D0" FromRole="ProductTypes" ToRole="MaterialTypes" />
+          <NavigationProperty Name="Processes" Relationship="Self.FK__Processes__Produ__34C8D9D1" FromRole="ProductTypes" ToRole="Processes" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Produc__38996AB5" FromRole="ProductTypes" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="WorkType">
+          <Key>
+            <PropertyRef Name="IdWorkType" />
+          </Key>
+          <Property Name="IdWorkType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HowManyDaysInWork" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK__Departmen__WorkT__29572725" FromRole="WorkTypes" ToRole="Departments" />
+          <NavigationProperty Name="MaterialTypes" Relationship="Self.FK__MaterialT__WorkT__267ABA7A" FromRole="WorkTypes" ToRole="MaterialTypes" />
+        </EntityType>
+        <Association Name="FK__Departmen__WorkT__29572725">
+          <End Role="WorkTypes" Type="Self.WorkType" Multiplicity="1" />
+          <End Role="Departments" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTypes">
+              <PropertyRef Name="IdWorkType" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="WorkType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Processes__Depar__35BCFE0A">
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="Processes" Type="Self.Process" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="IdDepartment" />
+            </Principal>
+            <Dependent Role="Processes">
+              <PropertyRef Name="DepartmentNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Materials__Mater__2F10007B">
+          <End Role="MaterialTypes" Type="Self.MaterialType" Multiplicity="1" />
+          <End Role="Materials" Type="Self.Material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialTypes">
+              <PropertyRef Name="IdMaterialType" />
+            </Principal>
+            <Dependent Role="Materials">
+              <PropertyRef Name="MaterialType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Processes__Mater__33D4B598">
+          <End Role="Materials" Type="Self.Material" Multiplicity="1" />
+          <End Role="Processes" Type="Self.Process" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="IdMaterial" />
+            </Principal>
+            <Dependent Role="Processes">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MaterialT__WorkT__267ABA7A">
+          <End Role="WorkTypes" Type="Self.WorkType" Multiplicity="1" />
+          <End Role="MaterialTypes" Type="Self.MaterialType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTypes">
+              <PropertyRef Name="IdWorkType" />
+            </Principal>
+            <Dependent Role="MaterialTypes">
+              <PropertyRef Name="WorkType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductTy__UsedM__2C3393D0">
+          <End Role="MaterialTypes" Type="Self.MaterialType" Multiplicity="1" />
+          <End Role="ProductTypes" Type="Self.ProductType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialTypes">
+              <PropertyRef Name="IdMaterialType" />
+            </Principal>
+            <Dependent Role="ProductTypes">
+              <PropertyRef Name="UsedMaterialType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Processes__Produ__34C8D9D1">
+          <End Role="ProductTypes" Type="Self.ProductType" Multiplicity="1" />
+          <End Role="Processes" Type="Self.Process" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTypes">
+              <PropertyRef Name="IdProductType" />
+            </Principal>
+            <Dependent Role="Processes">
+              <PropertyRef Name="ProductType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__Produc__38996AB5">
+          <End Role="ProductTypes" Type="Self.ProductType" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTypes">
+              <PropertyRef Name="IdProductType" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ProductType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Materials" EntityType="Self.Material" />
+          <EntitySet Name="MaterialTypes" EntityType="Self.MaterialType" />
+          <EntitySet Name="Processes" EntityType="Self.Process" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
+          <EntitySet Name="WorkTypes" EntityType="Self.WorkType" />
+          <AssociationSet Name="FK__Departmen__WorkT__29572725" Association="Self.FK__Departmen__WorkT__29572725">
+            <End Role="WorkTypes" EntitySet="WorkTypes" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Processes__Depar__35BCFE0A" Association="Self.FK__Processes__Depar__35BCFE0A">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Processes" EntitySet="Processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Materials__Mater__2F10007B" Association="Self.FK__Materials__Mater__2F10007B">
+            <End Role="MaterialTypes" EntitySet="MaterialTypes" />
+            <End Role="Materials" EntitySet="Materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Processes__Mater__33D4B598" Association="Self.FK__Processes__Mater__33D4B598">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="Processes" EntitySet="Processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MaterialT__WorkT__267ABA7A" Association="Self.FK__MaterialT__WorkT__267ABA7A">
+            <End Role="WorkTypes" EntitySet="WorkTypes" />
+            <End Role="MaterialTypes" EntitySet="MaterialTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductTy__UsedM__2C3393D0" Association="Self.FK__ProductTy__UsedM__2C3393D0">
+            <End Role="MaterialTypes" EntitySet="MaterialTypes" />
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Processes__Produ__34C8D9D1" Association="Self.FK__Processes__Produ__34C8D9D1">
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+            <End Role="Processes" EntitySet="Processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Produc__38996AB5" Association="Self.FK__Products__Produc__38996AB5">
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DatabaseModelContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="DatabaseModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="EmployeeNumber" ColumnName="EmployeeNumber" />
+                <ScalarProperty Name="WorkType" ColumnName="WorkType" />
+                <ScalarProperty Name="IsWork" ColumnName="IsWork" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="DatabaseModel.Material">
+              <MappingFragment StoreEntitySet="Materials">
+                <ScalarProperty Name="IdMaterial" ColumnName="IdMaterial" />
+                <ScalarProperty Name="InventoryNumber" ColumnName="InventoryNumber" />
+                <ScalarProperty Name="MaterialType" ColumnName="MaterialType" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="WherePlace" ColumnName="WherePlace" />
+                <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialTypes">
+            <EntityTypeMapping TypeName="DatabaseModel.MaterialType">
+              <MappingFragment StoreEntitySet="MaterialTypes">
+                <ScalarProperty Name="IdMaterialType" ColumnName="IdMaterialType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="WorkType" ColumnName="WorkType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Processes">
+            <EntityTypeMapping TypeName="DatabaseModel.Process">
+              <MappingFragment StoreEntitySet="Processes">
+                <ScalarProperty Name="IdProcess" ColumnName="IdProcess" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+                <ScalarProperty Name="DepartmentNumber" ColumnName="DepartmentNumber" />
+                <ScalarProperty Name="StartDateWork" ColumnName="StartDateWork" />
+                <ScalarProperty Name="EndDateWork" ColumnName="EndDateWork" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="DatabaseModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+                <ScalarProperty Name="InventoryNumber" ColumnName="InventoryNumber" />
+                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+                <ScalarProperty Name="Recipient" ColumnName="Recipient" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTypes">
+            <EntityTypeMapping TypeName="DatabaseModel.ProductType">
+              <MappingFragment StoreEntitySet="ProductTypes">
+                <ScalarProperty Name="IdProductType" ColumnName="IdProductType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UsedMaterialType" ColumnName="UsedMaterialType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkTypes">
+            <EntityTypeMapping TypeName="DatabaseModel.WorkType">
+              <MappingFragment StoreEntitySet="WorkTypes">
+                <ScalarProperty Name="IdWorkType" ColumnName="IdWorkType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="HowManyDaysInWork" ColumnName="HowManyDaysInWork" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
