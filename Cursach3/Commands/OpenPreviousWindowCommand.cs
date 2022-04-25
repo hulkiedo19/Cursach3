@@ -11,10 +11,12 @@ namespace Cursach3.Commands
     public class OpenPreviousWindowCommand : Command
     {
         private string _oldWindow;
+        private int _newWindow;
 
-        public OpenPreviousWindowCommand(string oldWindow)
+        public OpenPreviousWindowCommand(string oldWindow, int newWindow)
         {
             _oldWindow = oldWindow;
+            _newWindow = newWindow;
         }
 
         public override void Execute(object parameter)
@@ -26,7 +28,21 @@ namespace Cursach3.Commands
                 curWindowIndex++;
             }
 
-            var command = new OpenCloseWindowCommand(new MainWindow(), Application.Current.Windows[curWindowIndex]);
+            OpenCloseWindowCommand command = null;
+
+            switch(_newWindow)
+            {
+                case 0:
+                    command = new OpenCloseWindowCommand(new MainWindow(), Application.Current.Windows[curWindowIndex]);
+                    break;
+                case 1:
+                    command = new OpenCloseWindowCommand(new AdminWindow(), Application.Current.Windows[curWindowIndex]);
+                    break;
+                case 2:
+                    command = new OpenCloseWindowCommand(new UserWindow(), Application.Current.Windows[curWindowIndex]);
+                    break;
+            }
+
             command.Execute(parameter);
         }
     }

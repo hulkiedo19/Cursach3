@@ -16,9 +16,21 @@
     
     <Grid>
         <Button 
+            HorizontalAlignment="Left"
             Width="100"
             Height="100"
             Content="GO TO ADMIN"
             Command="{Binding GoToAdmin}"/>
+        <Button 
+            HorizontalAlignment="Right"
+            Width="100"
+            Height="100"
+            Content="GO TO USER"
+            Command="{Binding GoToUser}"/>
+        <Button
+            Width="100"
+            Height="100"
+            Content="EXIT"
+            Click="Button_Click"/>
     </Grid>
 </Window>

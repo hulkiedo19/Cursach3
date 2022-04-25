@@ -4,10 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cursach3.Views"
+        xmlns:vm="clr-namespace:Cursach3.ViewModels"
         mc:Ignorable="d"
         Title="AdminWindow" 
-        Height="750" 
+        Height="780" 
         Width="800">
+
+    <Window.DataContext>
+        <vm:AdminWindowViewModel />
+    </Window.DataContext>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition 
@@ -24,25 +30,34 @@
 
             <Button 
                 Width="100"
-                Margin="4"/>
+                Margin="4"
+                Content="Add Materials"/>
             <Button 
                 Width="100"
-                Margin="4"/>
+                Margin="4"
+                Content="Add Processes"/>
             <Button 
                 Width="100"
-                Margin="4"/>
+                Margin="4"
+                Content="Add Products"/>
             <Button 
                 Width="100"
-                Margin="4"/>
+                Margin="4"
+                Content="Delete Materials"/>
             <Button 
                 Width="100"
-                Margin="4"/>
+                Margin="4"
+                Content="Delete Processes"/>
             <Button 
                 Width="100"
-                Margin="4"/>
+                Margin="4"
+                Content="Delete Products"/>
             <Button 
                 Width="100"
-                Margin="4"/>
+                Margin="4"
+                Content="Exit"
+                Click="Button_Click"/>
+            <!--Command="{Binding GoBack}"-->
 
         </StackPanel>
         
@@ -50,66 +65,128 @@
             Grid.Row="1">
 
             <!--Materials-->
+            <TextBlock 
+                Text="Materials:"/>
+            
             <DataGrid
-                Height="200">
+                Height="200"
+                ScrollViewer.CanContentScroll="True"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding Materials, UpdateSourceTrigger=PropertyChanged}">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn 
-                        Header="Id"/>
+                        Header="Id"
+                        Width="*"
+                        Binding="{Binding Path=IdMaterial}"/>
                     <DataGridTextColumn 
-                        Header="Number"/>
+                        Header="Number"
+                        Width="*"
+                        Binding="{Binding Path=InventoryNumber}"/>
                     <DataGridTextColumn 
-                        Header="Type"/>
+                        Header="Type"
+                        Width="*"
+                        Binding="{Binding Path=MaterialType1.Description}"/>
                     <DataGridTextColumn 
-                        Header="Amount"/>
+                        Header="Amount"
+                        Width="*"
+                        Binding="{Binding Path=Amount}"/>
                     <DataGridTextColumn 
-                        Header="WherePlace"/>
+                        Header="WherePlace"
+                        Width="*"
+                        Binding="{Binding Path=WherePlace}"/>
                     <DataGridTextColumn 
-                        Header="ArrivalTime"/>
+                        Header="ArrivalTime"
+                        Width="*"
+                        Binding="{Binding Path=ArrivalTime}"/>
                 </DataGrid.Columns>
                 
             </DataGrid>
 
             <!--Processes-->
+            <TextBlock 
+                Text="Processes:"/>
+            
             <DataGrid
-                Height="200">
+                Height="200"
+                ScrollViewer.CanContentScroll="True"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding Processes, UpdateSourceTrigger=PropertyChanged}">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn 
-                        Header="Id"/>
+                        Header="Id"
+                        Width="*"
+                        Binding="{Binding Path=IdProcess}"/>
                     <DataGridTextColumn 
-                        Header="Material"/>
+                        Header="Material"
+                        Width="*"
+                        Binding="{Binding Path=Material.MaterialType1.Description}"/>
                     <DataGridTextColumn 
-                        Header="Product"/>
+                        Header="Product"
+                        Width="*"
+                        Binding="{Binding Path=ProductType1.Description}"/>
                     <DataGridTextColumn 
-                        Header="Department"/>
+                        Header="Department"
+                        Width="*"
+                        Binding="{Binding Path=Department.DepartmentName}"/>
                     <DataGridTextColumn 
-                        Header="StartDate"/>
+                        Header="StartDate"
+                        Width="*"
+                        Binding="{Binding Path=StartDateWork}"/>
                     <DataGridTextColumn 
-                        Header="EndDate"/>
+                        Header="EndDate"
+                        Width="*"
+                        Binding="{Binding Path=EndDateWork}"/>
                     <DataGridTextColumn 
-                        Header="IsCompleted"/>
+                        Header="IsCompleted"
+                        Width="*"
+                        Binding="{Binding Path=IsCompleted}"/>
                 </DataGrid.Columns>
                 
             </DataGrid>
 
             <!--Products-->
+            <TextBlock 
+                Text="Products:"/>
+            
             <DataGrid
-                Height="200">
+                Height="200"
+                ScrollViewer.CanContentScroll="True"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding Products, UpdateSourceTrigger=PropertyChanged}">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn 
-                        Header="Id"/>
+                        Header="Id"
+                        Width="*"
+                        Binding="{Binding Path=IdProduct}"/>
                     <DataGridTextColumn 
-                        Header="Number"/>
+                        Header="Number"
+                        Width="*"
+                        Binding="{Binding Path=InventoryNumber}"/>
                     <DataGridTextColumn 
-                        Header="Product"/>
+                        Header="Product"
+                        Width="*"
+                        Binding="{Binding Path=ProductType1.Description}"/>
                     <DataGridTextColumn 
-                        Header="Recipient"/>
+                        Header="Recipient"
+                        Width="*"
+                        Binding="{Binding Path=Recipient}"/>
                     <DataGridTextColumn 
-                        Header="DeliveryDate"/>
+                        Header="DeliveryDate"
+                        Width="*"
+                        Binding="{Binding Path=DeliveryDate}"/>
                     <DataGridTextColumn 
-                        Header="IsSent"/>
+                        Header="IsSent"
+                        Width="*"
+                        Binding="{Binding Path=IsSent}"/>
                 </DataGrid.Columns>
                 
             </DataGrid>
