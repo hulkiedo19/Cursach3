@@ -28,6 +28,7 @@
             Orientation="Horizontal"
             HorizontalAlignment="Center">
 
+            <!--
             <Button 
                 Width="100"
                 Margin="4"
@@ -40,18 +41,22 @@
                 Width="100"
                 Margin="4"
                 Content="Add Products"/>
+            -->
             <Button 
                 Width="100"
                 Margin="4"
-                Content="Delete Materials"/>
+                Content="Delete Materials"
+                Command="{Binding DeleteMaterial}"/>
             <Button 
                 Width="100"
                 Margin="4"
-                Content="Delete Processes"/>
+                Content="Delete Processes"
+                Command="{Binding DeleteProcess}"/>
             <Button 
                 Width="100"
                 Margin="4"
-                Content="Delete Products"/>
+                Content="Delete Products"
+                Command="{Binding DeleteProduct}"/>
 
             <StackPanel
                 VerticalAlignment="Center">
@@ -84,6 +89,7 @@
                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"
                 AutoGenerateColumns="False"
+                SelectedItem="{Binding SelectedMaterial, TargetNullValue={x:Static CollectionView.NewItemPlaceholder}}"
                 ItemsSource="{Binding Materials, UpdateSourceTrigger=PropertyChanged}">
 
                 <DataGrid.Columns>
@@ -125,6 +131,7 @@
                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"
                 AutoGenerateColumns="False"
+                SelectedItem="{Binding SelectedProcess, TargetNullValue={x:Static CollectionView.NewItemPlaceholder}}"
                 ItemsSource="{Binding Processes, UpdateSourceTrigger=PropertyChanged}">
 
                 <DataGrid.Columns>
@@ -170,6 +177,7 @@
                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"
                 AutoGenerateColumns="False"
+                SelectedItem="{Binding SelectedProduct, TargetNullValue={x:Static CollectionView.NewItemPlaceholder}}"
                 ItemsSource="{Binding Products, UpdateSourceTrigger=PropertyChanged}">
 
                 <DataGrid.Columns>

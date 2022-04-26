@@ -65,6 +65,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\DeleteMaterialCommand.cs" />
+    <Compile Include="Commands\DeleteProcessCommand.cs" />
+    <Compile Include="Commands\DeleteProductCommand.cs" />
     <Compile Include="Models\DatabaseModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

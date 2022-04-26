@@ -15,6 +15,14 @@ namespace Cursach3.ViewModels
         private List<Models.Process> _processes;
         private List<Models.Product> _products;
 
+        private Material _selectedMaterial;
+        private Process _selectedProcess;
+        private Product _selectedProduct;
+
+        public ICommand DeleteMaterial => new DeleteMaterialCommand(this);
+        public ICommand DeleteProcess => new DeleteProcessCommand(this);
+        public ICommand DeleteProduct => new DeleteProductCommand(this);
+
         public AdminWindowViewModel()
         {
             using(var databaseEntities = new DatabaseEntities())
@@ -51,6 +59,24 @@ namespace Cursach3.ViewModels
         {
             get => _products;
             set => Set(ref _products, value, nameof(Product));
+        }
+
+        public Material SelectedMaterial
+        {
+            get => _selectedMaterial;
+            set => Set(ref _selectedMaterial, value, nameof(Material));
+        }
+
+        public Process SelectedProcess
+        {
+            get => _selectedProcess;
+            set => Set(ref _selectedProcess, value, nameof(Process));
+        }
+
+        public Product SelectedProduct
+        {
+            get => _selectedProduct;
+            set => Set(ref _selectedProduct, value, nameof(Product));
         }
     }
 }
