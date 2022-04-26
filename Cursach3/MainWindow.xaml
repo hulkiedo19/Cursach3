@@ -20,13 +20,13 @@
             Width="100"
             Height="100"
             Content="GO TO ADMIN"
-            Command="{Binding GoToAdmin}"/>
+            Click="Button_Click_1"/>
         <Button 
             HorizontalAlignment="Right"
             Width="100"
             Height="100"
             Content="GO TO USER"
-            Command="{Binding GoToUser}"/>
+            Click="Button_Click_2"/>
         <Button
             Width="100"
             Height="100"

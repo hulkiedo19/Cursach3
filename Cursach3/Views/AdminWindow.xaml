@@ -52,12 +52,22 @@
                 Width="100"
                 Margin="4"
                 Content="Delete Products"/>
-            <Button 
-                Width="100"
-                Margin="4"
-                Content="Exit"
-                Click="Button_Click"/>
-            <!--Command="{Binding GoBack}"-->
+
+            <StackPanel
+                VerticalAlignment="Center">
+                <Button 
+                    Width="100"
+                    Height="35"
+                    Margin="4"
+                    Content="Exit"
+                    Click="Button_Click"/>
+                <Button 
+                    Width="100"
+                    Height="35"
+                    Margin="4"
+                    Content="Back"
+                    Click="Button_Click_1"/>
+            </StackPanel>
 
         </StackPanel>
         

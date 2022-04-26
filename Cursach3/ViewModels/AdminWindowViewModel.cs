@@ -11,12 +11,9 @@ namespace Cursach3.ViewModels
 {
     public class AdminWindowViewModel : ViewModel
     {
-        private readonly string _title = "AdminWindow";
         private List<Models.Material> _materials;
         private List<Models.Process> _processes;
         private List<Models.Product> _products;
-
-        public ICommand GoBack => new OpenPreviousWindowCommand(_title, 0);
 
         public AdminWindowViewModel()
         {

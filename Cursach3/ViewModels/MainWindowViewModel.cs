@@ -10,9 +10,9 @@ using Cursach3.Views;
 
 namespace Cursach3.ViewModels
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : ViewModel
     {
-        public ICommand GoToAdmin => new OpenCloseWindowCommand(new AdminWindow(), Application.Current.MainWindow);
-        public ICommand GoToUser => new OpenCloseWindowCommand(new UserWindow(), Application.Current.MainWindow);
+        //public ICommand GoToAdmin => new OpenCloseWindowCommand(new AdminWindow(), Application.Current.MainWindow);
+        //public ICommand GoToUser => new OpenCloseWindowCommand(new UserWindow(), Application.Current.MainWindow);
     }
 }

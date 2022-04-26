@@ -46,12 +46,21 @@
                 Margin="4"
                 Content="типы работ"/>
 
-            <Button 
-                Width="90"
-                Margin="4"
-                Content="выход"
-                Click="Button_Click"/>
-            <!--Command="{Binding GoBack}"-->
+            <StackPanel
+                VerticalAlignment="Center">
+
+                <Button 
+                    Width="90"
+                    Margin="4"
+                    Content="выход"
+                    Click="Button_Click"/>
+                <Button 
+                    Width="90"
+                    Margin="4"
+                    Content="назад"
+                    Click="Button_Click_1"/>
+                
+            </StackPanel>
 
         </StackPanel>
 

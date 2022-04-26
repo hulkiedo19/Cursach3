@@ -11,13 +11,10 @@ namespace Cursach3.ViewModels
 {
     public class UserWindowViewModel : ViewModel
     {
-        private readonly string _title = "UserWindow";
         private List<Models.Department> _departments;
         private List<Models.ProductType> _productTypes;
         private List<Models.MaterialType> _materialTypes;
         private List<Models.WorkType> _workTypes;
-
-        public ICommand GoBack => new OpenPreviousWindowCommand(_title, 0);
 
         public UserWindowViewModel()
         {

@@ -28,5 +28,12 @@ namespace Cursach3.Views
         {
             this.Close();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Window window = new MainWindow();
+            window.Show();
+            this.Close();
+        }
     }
 }

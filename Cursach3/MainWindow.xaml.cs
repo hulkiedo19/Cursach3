@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cursach3.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,20 @@ namespace Cursach3
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Window window = new AdminWindow();
+            window.Show();
+            this.Close();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Window window = new UserWindow();
+            window.Show();
             this.Close();
         }
     }

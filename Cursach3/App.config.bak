@@ -14,6 +14,6 @@
     </providers>
   </entityFramework>
   <connectionStrings>
-    <add name="DatabaseEntities" connectionString="metadata=res://*/Models.DatabaseModel.csdl|res://*/Models.DatabaseModel.ssdl|res://*/Models.DatabaseModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=PC-232-04\SQLEXPRESS;initial catalog=Cursach3;user id=U-19;password=19$RPEe;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+    <add name="DatabaseEntities" connectionString="metadata=res://*/Models.DatabaseModel.csdl|res://*/Models.DatabaseModel.ssdl|res://*/Models.DatabaseModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-67TKTLL;initial catalog=Cursach3;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
   </connectionStrings>
 </configuration>
